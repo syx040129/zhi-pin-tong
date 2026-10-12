@@ -1,0 +1,75 @@
+{
+  "version": "2.0",
+  "created_at": "2026-10-12T15:28:36.704562",
+  "updated_at": "2026-10-12T15:37:05.202928",
+  "current_step": 0,
+  "steps": {
+    "0": {
+      "name": "初始化",
+      "status": "completed",
+      "started_at": null,
+      "completed_at": "2026-10-12T15:37:05.202928"
+    },
+    "1": {
+      "name": "主题确认",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null
+    },
+    "2": {
+      "name": "文献搜索",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null
+    },
+    "3": {
+      "name": "大纲生成",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null
+    },
+    "4": {
+      "name": "分章节撰写",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null
+    },
+    "5": {
+      "name": "AIGC降重",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null
+    },
+    "6": {
+      "name": "审校润色",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null
+    },
+    "7": {
+      "name": "合并检测",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null
+    },
+    "8": {
+      "name": "图片生成",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null
+    },
+    "9": {
+      "name": "文档导出",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null
+    }
+  },
+  "chapter_status": {},
+  "references_status": {
+    "pool_created": false,
+    "pool_path": "",
+    "total_refs": 0,
+    "zh_ratio": 0.0
+  }
+}

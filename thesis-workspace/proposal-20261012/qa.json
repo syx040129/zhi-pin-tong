@@ -1,0 +1,84 @@
+{
+  "output": "G:\\project\\智聘通招聘网站的设计与实现开题报告.docx",
+  "body_chinese_characters": 4194,
+  "reference_count": 10,
+  "hyperlinks": [
+    [
+      "黄翠.基于模糊综合评价法的企业多岗位人才招聘模块设计研究[J].贵阳学院学报(自然科学版),2026,21(01):42-48+54.",
+      "https://gjzb.cbpt.cnki.net/portal/journal/portal/client/paper/3253efd46d184ef6ca02dfd403c96d34"
+    ],
+    [
+      "王晓莹.企业人力资源管理中人员招聘体系的优化设计[J].中国集体经济,2024(03):127-130.",
+      "https://zjtg.cbpt.cnki.net/portal/journal/portal/client/paper/9c3bfb2698ab02f8e7fcc35bd2860f3d"
+    ],
+    [
+      "任书仪,李英玲,蔡牧昕.基于协同注意力网络的人岗匹配方法研究[J].西南民族大学学报(自然科学版),2025,51(03):323-331.",
+      "https://xnmz.cbpt.cnki.net/portal/journal/portal/client/paper/064d306ff54ad6845cb749d6c6acfbff"
+    ],
+    [
+      "张茜,白琳,杨丽娜,等.基于自注意力关联关系建模的医院招聘人岗智能匹配研究[J].广西大学学报(自然科学版),2025,50(02):349-360.",
+      "https://gxkz.cbpt.cnki.net/portal/journal/portal/client/paper/4a0b224ccdbaaf8e66d1684689a0b1e3"
+    ],
+    [
+      "王雅娟,潘惠苹.基于知识图谱和注意力机制的人力资源岗位匹配预测[J].贵阳学院学报(自然科学版),2025,20(04):45-50.",
+      "https://gjzb.cbpt.cnki.net/portal/journal/portal/client/paper/e258b0457f7c13ea2074b34921d05c1d"
+    ],
+    [
+      "郭立群,张潇予,李超.基于人工智能的高校就业服务支持体系建设——以中国农业大学为例[J].中国大学生就业,2026(07):67-74.",
+      "https://jiuy.cbpt.cnki.net/portal/journal/portal/client/paper/5c7a16c2c539f2bb9658cc40fe899352"
+    ],
+    [
+      "啜子涵,薛霞.融合键值表示与改进注意力机制的人岗匹配模型[J].信息技术与信息化,2026(02):171-176.",
+      "https://sddz.cbpt.cnki.net/portal/journal/portal/client/paper/602e67da2c7c90694cb8d053b02166b8"
+    ],
+    [
+      "朱芊慧,刘风华,钱进,等.基于Spring Boot+Vue技术的煤矿安全培训后台设计与实现[J].现代信息科技,2024,8(18):116-119+124.",
+      "https://xdxk.cbpt.cnki.net/portal/journal/portal/client/paper/28994a2147030bb652e897b0820614e3"
+    ],
+    [
+      "吴晓云,袁昊东.基于Spring Boot的在线考试管理系统[J].微型电脑应用,2024,40(11):199-204.",
+      "https://wxdy.cbpt.cnki.net/portal/journal/portal/client/paper/00b455993a45d118bf44285c4eadb214"
+    ],
+    [
+      "Gong Z, Song Y, Zhang T, et al. Your Career Path Matters in Person-Job Fit[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2024, 38(8): 8427-8435.",
+      "https://ojs.aaai.org/index.php/AAAI/article/view/28685"
+    ]
+  ],
+  "unchanged_parts": [
+    "[Content_Types].xml",
+    "_rels/",
+    "_rels/.rels",
+    "customXml/",
+    "customXml/_rels/",
+    "customXml/_rels/item1.xml.rels",
+    "customXml/item1.xml",
+    "customXml/itemProps1.xml",
+    "docProps/",
+    "docProps/app.xml",
+    "docProps/core.xml",
+    "docProps/custom.xml",
+    "word/",
+    "word/_rels/",
+    "word/fontTable.xml",
+    "word/footer1.xml",
+    "word/footer2.xml",
+    "word/footer3.xml",
+    "word/footer4.xml",
+    "word/header1.xml",
+    "word/header2.xml",
+    "word/header3.xml",
+    "word/media/",
+    "word/media/image2.jpeg",
+    "word/media/image3.png",
+    "word/numbering.xml",
+    "word/settings.xml",
+    "word/styles.xml",
+    "word/theme/",
+    "word/theme/theme1.xml"
+  ],
+  "changed_parts": [
+    "word/_rels/document.xml.rels",
+    "word/document.xml",
+    "word/media/image1.png"
+  ]
+}

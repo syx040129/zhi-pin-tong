@@ -1,0 +1,74 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: smart-recruitment
+  config:
+    # backend 工作目录下读取仓库根目录的本地环境文件；文件不存在时正常回退 Mock
+    import:
+      - optional:file:.env.local[.properties]
+      - optional:file:../.env.local[.properties]
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+# 应用自定义配置
+app:
+  jwt:
+    # JWT 密钥(HS256 要求至少 32 字节), 生产环境务必修改
+    secret: smart-recruitment-demo-secret-key-2026-change-me-please
+    expire-hours: 168
+  upload-dir: ./uploads
+  cors:
+    allowed-origins: "${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174}"
+
+# AI 配置：enabled=false + mock=true 时系统使用内置演示模式，无需 API Key 即可运行全部功能。
+# 接入真实大模型：ai.enabled=true, ai.mock=false, 并填写 base-url / api-key / model / embedding-model
+ai:
+  enabled: ${AI_ENABLED:false}
+  mock: ${AI_MOCK:true}
+  base-url: "${AI_BASE_URL:https://api.openai.com}"
+  # Key 从 AI_API_KEY 读取；Spring config.import 自动导入本地 .env.local
+  api-key: "${AI_API_KEY:}"
+  model: "${AI_MODEL:gpt-4o-mini}"
+  embedding-model: "${AI_EMBEDDING_MODEL:text-embedding-3-small}"
+  # DeepSeek 暂无 OpenAI 兼容的 Embedding 接口，关闭后语义匹配自动使用本地向量
+  embedding-enabled: ${AI_EMBEDDING_ENABLED:true}
+  temperature: 0.4
+  max-tokens: 2000
+  timeout-seconds: 30
+  # 智能推荐候选池大小与最终返回条数
+  recommend-pool-size: 20
+  recommend-limit: 10
+
+logging:
+  level:
+    com.example.recruitment: info
+    org.springframework.ai: warn

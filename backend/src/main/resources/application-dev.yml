@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/smart_recruitment?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: ""
+      database: 0
+      timeout: 3s
+  ai:
+    openai:
+      api-key: ${ai.api-key:not-configured}
+      base-url: ${ai.base-url:https://api.openai.com}
+      chat:
+        options:
+          model: ${ai.model:gpt-4o-mini}
+          temperature: 0.4
+      embedding:
+        options:
+          model: ${ai.embedding-model:text-embedding-3-small}
+
+logging:
+  level:
+    com.example.recruitment: debug

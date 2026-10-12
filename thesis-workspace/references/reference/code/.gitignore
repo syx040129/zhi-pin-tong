@@ -1,0 +1,30 @@
+# Java / Maven
+backend/target/
+*.class
+
+# Node
+frontend/node_modules/
+frontend/dist/
+npm-debug.log*
+
+# 上传文件
+uploads/
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# 临时
+*.log
+
+# 本地密钥（不要提交）
+.env.local
+backend/.env.local
+
+# Local UI snapshots and restoration backups
+backups/
+docs/ui-preview/*.png
+docs/ui-preview/verification-progress.json

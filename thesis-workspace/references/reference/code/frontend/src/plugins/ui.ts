@@ -1,0 +1,12 @@
+// Register only components and icons used by this application.
+// Regenerate with: node scripts/generate-ui.mjs
+import type { App } from 'vue'
+import { ElAlert, ElAvatar, ElButton, ElCol, ElCollapse, ElCollapseItem, ElDatePicker, ElDescriptions, ElDescriptionsItem, ElDialog, ElDivider, ElDrawer, ElDropdown, ElDropdownItem, ElDropdownMenu, ElEmpty, ElForm, ElFormItem, ElIcon, ElInput, ElInputNumber, ElOption, ElPagination, ElProgress, ElRadio, ElRadioButton, ElRadioGroup, ElResult, ElRow, ElSelect, ElSkeleton, ElSwitch, ElTable, ElTableColumn, ElTag, ElTooltip, ElUpload, ElLoading } from 'element-plus'
+import { Aim, AlarmClock, ArrowDown, ArrowLeft, ArrowRight, Back, Bottom, Briefcase, Camera, ChatDotRound, ChatLineRound, ChatLineSquare, Check, Checked, CircleCheckFilled, CirclePlus, Clock, Close, Coin, Connection, DataAnalysis, Delete, Document, DocumentAdd, DocumentChecked, EditPen, Expand, Finished, Fold, InfoFilled, Iphone, Key, Link, List, Loading, Location, Lock, MagicStick, Medal, Menu, Message, Minus, Monitor, OfficeBuilding, Phone, PieChart, Plus, Promotion, Refresh, RefreshLeft, Search, Setting, Star, StarFilled, Tickets, Top, TrendCharts, Upload, User, UserFilled, VideoPlay, View, Warning, WarningFilled } from '@element-plus/icons-vue'
+
+export function registerUi(app:App) {
+  const components = { ElAlert, ElAvatar, ElButton, ElCol, ElCollapse, ElCollapseItem, ElDatePicker, ElDescriptions, ElDescriptionsItem, ElDialog, ElDivider, ElDrawer, ElDropdown, ElDropdownItem, ElDropdownMenu, ElEmpty, ElForm, ElFormItem, ElIcon, ElInput, ElInputNumber, ElOption, ElPagination, ElProgress, ElRadio, ElRadioButton, ElRadioGroup, ElResult, ElRow, ElSelect, ElSkeleton, ElSwitch, ElTable, ElTableColumn, ElTag, ElTooltip, ElUpload }
+  const icons = { Aim, AlarmClock, ArrowDown, ArrowLeft, ArrowRight, Back, Bottom, Briefcase, Camera, ChatDotRound, ChatLineRound, ChatLineSquare, Check, Checked, CircleCheckFilled, CirclePlus, Clock, Close, Coin, Connection, DataAnalysis, Delete, Document, DocumentAdd, DocumentChecked, EditPen, Expand, Finished, Fold, InfoFilled, Iphone, Key, Link, List, Loading, Location, Lock, MagicStick, Medal, Menu, Message, Minus, Monitor, OfficeBuilding, Phone, PieChart, Plus, Promotion, Refresh, RefreshLeft, Search, Setting, Star, StarFilled, Tickets, Top, TrendCharts, Upload, User, UserFilled, VideoPlay, View, Warning, WarningFilled }
+  for (const [name,component] of Object.entries({ ...components,...icons })) app.component(name,component)
+  app.directive('loading',ElLoading.directive)
+}

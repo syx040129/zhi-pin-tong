@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="2870" viewBox="0 0 1700 2870" role="img" aria-label="企业用例图">
+  <defs>
+    <marker id="associationArrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 11 6 L 0 12 Z" fill="#171717" stroke="#171717" stroke-width="0.7"/>
+    </marker>
+    <marker id="includeArrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 11 6 L 0 12 Z" fill="#171717" stroke="#171717" stroke-width="0.7"/>
+    </marker>
+  </defs>
+  <rect width="1700" height="2870" fill="#ffffff"/>
+  <g font-family="Microsoft YaHei, SimHei, Arial, sans-serif">
+    <circle cx="120" cy="1339" r="25" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+    <line x1="120" y1="1364" x2="120" y2="1441" stroke="#111111" stroke-width="2"/>
+    <line x1="72" y1="1388" x2="168" y2="1388" stroke="#111111" stroke-width="2"/>
+    
+    <line x1="120" y1="1441" x2="75" y2="1502" stroke="#111111" stroke-width="2"/>
+    <line x1="120" y1="1441" x2="165" y2="1502" stroke="#111111" stroke-width="2"/>
+    <text x="120" y="1550" text-anchor="middle" dominant-baseline="middle" font-size="24" font-weight="500" fill="#111111">企业</text>
+    <line x1="168" y1="1411.5" x2="427.5" y2="117" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="117" x2="1252.5" y2="117" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="127.58829868135184" x2="1252.9922294501046" y2="175.16601912084207" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="168" y1="1411.5" x2="427.5" y2="303" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="303" x2="1252.5" y2="303" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="313.58829868135183" x2="1252.9922294501046" y2="361.16601912084207" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="680.7652252885983" y1="323.96087088143304" x2="1254.4388658539194" y2="419.57314430898657" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="168" y1="1411.5" x2="427.5" y2="559" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="559" x2="1252.5" y2="559" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="569.5882986813518" x2="1252.9922294501046" y2="617.1660191208421" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="680.7652252885983" y1="579.960870881433" x2="1254.4388658539194" y2="675.5731443089866" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="168" y1="1411.5" x2="427.5" y2="815" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="815" x2="1252.5" y2="815" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="825.5882986813518" x2="1252.9922294501046" y2="873.1660191208421" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="680.7652252885983" y1="835.960870881433" x2="1254.4388658539194" y2="931.5731443089866" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="168" y1="1411.5" x2="427.5" y2="1071" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="1071" x2="1252.5" y2="1071" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="1081.588298681352" x2="1252.9922294501046" y2="1129.166019120842" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="680.7652252885983" y1="1091.960870881433" x2="1254.4388658539194" y2="1187.5731443089867" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="678.6931687685299" y1="1101.9232921921325" x2="1256.7546937292902" y2="1246.4386734323225" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="675.9571205014405" y1="1111.3190401671468" x2="1259.8126300278018" y2="1305.9375433426005" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="168" y1="1411.5" x2="427.5" y2="1467" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="1467" x2="1252.5" y2="1467" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="1477.588298681352" x2="1252.9922294501046" y2="1525.166019120842" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="680.7652252885983" y1="1487.960870881433" x2="1254.4388658539194" y2="1583.5731443089867" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="678.6931687685299" y1="1497.9232921921325" x2="1256.7546937292902" y2="1642.4386734323225" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="168" y1="1411.5" x2="427.5" y2="1793" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="1793" x2="1252.5" y2="1793" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="1803.588298681352" x2="1252.9922294501046" y2="1851.166019120842" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="680.7652252885983" y1="1813.960870881433" x2="1254.4388658539194" y2="1909.5731443089867" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="168" y1="1411.5" x2="427.5" y2="2049" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="2049" x2="1252.5" y2="2049" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="2059.5882986813517" x2="1252.9922294501046" y2="2107.166019120842" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="680.7652252885983" y1="2069.960870881433" x2="1254.4388658539194" y2="2165.5731443089867" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="678.6931687685299" y1="2079.9232921921325" x2="1256.7546937292902" y2="2224.4386734323225" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="168" y1="1411.5" x2="427.5" y2="2375" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="2375" x2="1252.5" y2="2375" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="2385.5882986813517" x2="1252.9922294501046" y2="2433.166019120842" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="168" y1="1411.5" x2="427.5" y2="2561" stroke="#171717" stroke-width="1.75" marker-end="url(#associationArrow)"/>
+    <line x1="682.5" y1="2561" x2="1252.5" y2="2561" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="682.0595841762222" y1="2571.5882986813517" x2="1252.9922294501046" y2="2619.166019120842" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <line x1="680.7652252885983" y1="2581.960870881433" x2="1254.4388658539194" y2="2677.5731443089867" stroke="#171717" stroke-width="1.65" stroke-dasharray="7 6" marker-end="url(#includeArrow)"/>
+    <text x="1001.7" y="104" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="141.23182212746636" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7" y="290" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="327.2318221274664" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.0224640051781" y="364.50374400086304" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7" y="546" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="583.2318221274663" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.0224640051781" y="620.503744000863" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7" y="802" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="839.2318221274663" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.0224640051781" y="876.503744000863" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7" y="1058" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="1095.2318221274663" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.0224640051781" y="1132.503744000863" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.4076227465557" y="1169.851905686639" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.9162058362028" y="1207.305401945401" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7" y="1454" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="1491.2318221274663" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.0224640051781" y="1528.503744000863" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.4076227465557" y="1565.851905686639" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7" y="1780" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="1817.2318221274663" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.0224640051781" y="1854.503744000863" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7" y="2036" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="2073.2318221274663" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.0224640051781" y="2110.503744000863" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.4076227465557" y="2147.851905686639" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7" y="2362" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="2399.2318221274663" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7" y="2548" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1001.7818655295964" y="2585.2318221274663" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text><text x="1002.0224640051781" y="2622.503744000863" text-anchor="middle" dominant-baseline="middle" font-size="18" font-weight="400" fill="#111111">&lt;&lt;include&gt;&gt;</text>
+    <ellipse cx="555" cy="117" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="117" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">登录注册</text>
+    <ellipse cx="1395" cy="117" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="117" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">企业登录</text>
+    <ellipse cx="1395" cy="187" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="187" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">企业注册</text>
+    <ellipse cx="555" cy="303" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="303" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">浏览首页与岗位</text>
+    <ellipse cx="1395" cy="303" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="303" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">检索岗位</text>
+    <ellipse cx="1395" cy="373" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="373" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看岗位详情</text>
+    <ellipse cx="1395" cy="443" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="443" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看企业信息</text>
+    <ellipse cx="555" cy="559" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="559" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">企业信息管理</text>
+    <ellipse cx="1395" cy="559" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="559" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看企业资料</text>
+    <ellipse cx="1395" cy="629" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="629" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">编辑企业资料</text>
+    <ellipse cx="1395" cy="699" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="699" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">上传企业Logo</text>
+    <ellipse cx="555" cy="815" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="815" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">招聘数据看板</text>
+    <ellipse cx="1395" cy="815" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="815" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看岗位统计</text>
+    <ellipse cx="1395" cy="885" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="885" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看投递统计</text>
+    <ellipse cx="1395" cy="955" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="955" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看投递状态分布</text>
+    <ellipse cx="555" cy="1071" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="1071" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">岗位管理</text>
+    <ellipse cx="1395" cy="1071" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1071" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">发布岗位</text>
+    <ellipse cx="1395" cy="1141" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1141" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">编辑岗位</text>
+    <ellipse cx="1395" cy="1211" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1211" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">删除岗位</text>
+    <ellipse cx="1395" cy="1281" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1281" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">上架岗位</text>
+    <ellipse cx="1395" cy="1351" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1351" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">下架岗位</text>
+    <ellipse cx="555" cy="1467" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="1467" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">投递处理</text>
+    <ellipse cx="1395" cy="1467" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1467" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看收到的投递</text>
+    <ellipse cx="1395" cy="1537" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1537" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">按岗位筛选</text>
+    <ellipse cx="1395" cy="1607" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1607" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">按状态筛选</text>
+    <ellipse cx="1395" cy="1677" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1677" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">更新投递状态</text>
+    <ellipse cx="555" cy="1793" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="1793" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">候选人管理</text>
+    <ellipse cx="1395" cy="1793" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1793" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看候选人列表</text>
+    <ellipse cx="1395" cy="1863" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1863" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看候选人简历</text>
+    <ellipse cx="1395" cy="1933" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="1933" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看候选人详情</text>
+    <ellipse cx="555" cy="2049" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="2049" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">候选人AI分析</text>
+    <ellipse cx="1395" cy="2049" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="2049" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看岗位匹配度</text>
+    <ellipse cx="1395" cy="2119" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="2119" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看优势与风险</text>
+    <ellipse cx="1395" cy="2189" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="2189" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看面试建议</text>
+    <ellipse cx="1395" cy="2259" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="2259" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看录用建议</text>
+    <ellipse cx="555" cy="2375" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="2375" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">举报管理</text>
+    <ellipse cx="1395" cy="2375" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="2375" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">举报岗位或企业</text>
+    <ellipse cx="1395" cy="2445" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="2445" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看举报记录</text>
+    <ellipse cx="555" cy="2561" rx="127.5" ry="36" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="555" y="2561" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="400" fill="#111111">账号管理</text>
+    <ellipse cx="1395" cy="2561" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="2561" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">查看账号信息</text>
+    <ellipse cx="1395" cy="2631" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="2631" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">修改密码</text>
+    <ellipse cx="1395" cy="2701" rx="142.5" ry="32" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+    <text x="1395" y="2701" text-anchor="middle" dominant-baseline="middle" font-size="21" font-weight="400" fill="#111111">退出登录</text>
+  </g>
+</svg>

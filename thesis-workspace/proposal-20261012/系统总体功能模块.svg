@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100"><rect width="1800" height="1100" fill="white"/>
+<rect x="480" y="15" width="840" height="80" fill="white" stroke="black" stroke-width="3"/><text x="900.0" y="55.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="44">智聘通招聘网站</text>
+<path d="M 900 95 L 900 130" stroke="black" stroke-width="3"/>
+<path d="M 290 130 L 1510 130" stroke="black" stroke-width="3"/>
+<path d="M 290 130 L 290 170" stroke="black" stroke-width="3"/>
+<rect x="30" y="170" width="520" height="75" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="207.5" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="44">求职者</text>
+<path d="M 290 245 L 290 280" stroke="black" stroke-width="3"/>
+<rect x="30" y="280" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="309.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">用户认证与首页</text>
+<rect x="30" y="346" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="375.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">职位检索与详情</text>
+<rect x="30" y="412" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="441.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">简历管理</text>
+<rect x="30" y="478" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="507.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">职位收藏</text>
+<rect x="30" y="544" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="573.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">简历投递与状态</text>
+<rect x="30" y="610" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="639.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">个人中心</text>
+<rect x="30" y="676" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="705.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">简历分析</text>
+<rect x="30" y="742" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="771.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">岗位匹配与推荐</text>
+<rect x="30" y="808" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="837.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">简历优化</text>
+<rect x="30" y="874" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="290.0" y="903.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">模拟面试</text>
+<path d="M 900 130 L 900 170" stroke="black" stroke-width="3"/>
+<rect x="640" y="170" width="520" height="75" fill="white" stroke="black" stroke-width="3"/><text x="900.0" y="207.5" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="44">企业</text>
+<path d="M 900 245 L 900 280" stroke="black" stroke-width="3"/>
+<rect x="640" y="280" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="900.0" y="309.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">企业信息</text>
+<rect x="640" y="346" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="900.0" y="375.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">职位管理</text>
+<rect x="640" y="412" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="900.0" y="441.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">投递处理</text>
+<rect x="640" y="478" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="900.0" y="507.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">候选人分析</text>
+<rect x="640" y="544" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="900.0" y="573.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">数据统计</text>
+<path d="M 1510 130 L 1510 170" stroke="black" stroke-width="3"/>
+<rect x="1250" y="170" width="520" height="75" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="207.5" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="44">管理员</text>
+<path d="M 1510 245 L 1510 280" stroke="black" stroke-width="3"/>
+<rect x="1250" y="280" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="309.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">后台首页与个人中心</text>
+<rect x="1250" y="346" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="375.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">用户管理</text>
+<rect x="1250" y="412" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="441.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">企业管理</text>
+<rect x="1250" y="478" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="507.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">职位管理</text>
+<rect x="1250" y="544" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="573.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">简历管理</text>
+<rect x="1250" y="610" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="639.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">投递管理</text>
+<rect x="1250" y="676" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="705.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">举报处理</text>
+<rect x="1250" y="742" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="771.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">操作日志</text>
+<rect x="1250" y="808" width="520" height="58" fill="white" stroke="black" stroke-width="3"/><text x="1510.0" y="837.0" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">AI配置管理</text>
+<rect x="330" y="1000" width="1140" height="75" fill="white" stroke="black" stroke-width="3"/><text x="900.0" y="1037.5" text-anchor="middle" dominant-baseline="central" font-family="SimSun,宋体" font-size="40">补充功能  招聘智能助手与历史会话</text>
+</svg>

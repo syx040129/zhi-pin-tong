@@ -1,0 +1,23 @@
+{
+  "baseUrl": "http://127.0.0.1:5174",
+  "checks": 15,
+  "passed": 15,
+  "results": [
+    "keyboard skip link",
+    "guest route protection",
+    "login inline validation",
+    "768x1024 /",
+    "768x1024 /jobs",
+    "768x1024 /recommend",
+    "768x1024 /resume/analysis",
+    "768x1024 /ai/interview",
+    "844x390 /",
+    "844x390 /jobs",
+    "844x390 /recommend",
+    "844x390 /resume/analysis",
+    "844x390 /ai/interview",
+    "403 retains login state",
+    "401 clears login and preserves redirect"
+  ],
+  "browserIssues": []
+}

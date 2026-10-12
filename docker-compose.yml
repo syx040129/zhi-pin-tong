@@ -1,0 +1,80 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: smart-recruitment-mysql
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: root123456
+      MYSQL_DATABASE: smart_recruitment
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # 首次初始化自动执行建表与初始化数据脚本
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./sql/data.sql:/docker-entrypoint-initdb.d/02-data.sql:ro
+      - ./sql/demo-data.sql:/docker-entrypoint-initdb.d/03-demo-data.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: smart-recruitment-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  # 可选：docker compose --profile app up -d 一并启动前后端
+  backend:
+    profiles: ["app"]
+    build: ./backend
+    container_name: smart-recruitment-backend
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      MYSQL_HOST: mysql
+      MYSQL_PORT: "3306"
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root123456
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      # AI 接入真实模型时取消注释并填写
+      # AI_ENABLED: "true"
+      # AI_MOCK: "false"
+      # AI_API_KEY: sk-xxxx
+      # AI_BASE_URL: https://api.deepseek.com
+      # AI_MODEL: deepseek-v4-flash
+      # AI_EMBEDDING_ENABLED: "false"
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  frontend:
+    profiles: ["app"]
+    build: ./frontend
+    container_name: smart-recruitment-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql-data:
+  redis-data:

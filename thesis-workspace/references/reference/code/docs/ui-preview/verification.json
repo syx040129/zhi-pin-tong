@@ -1,0 +1,679 @@
+{
+  "baseUrl": "http://127.0.0.1:5174",
+  "checks": 61,
+  "passed": 61,
+  "routes": [
+    {
+      "route": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "home-desktop"
+    },
+    {
+      "route": "/jobs?page=2",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "jobs-page2"
+    },
+    {
+      "route": "/jobs/1",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "job-detail-guest"
+    },
+    {
+      "route": "/register?role=COMPANY",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "register-desktop"
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "home-mobile"
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user--desktop"
+    },
+    {
+      "route": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-profile-desktop"
+    },
+    {
+      "route": "/resume",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-resume-desktop"
+    },
+    {
+      "route": "/resume/edit",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-resume-edit-desktop"
+    },
+    {
+      "route": "/resume/analysis",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-resume-analysis-desktop"
+    },
+    {
+      "route": "/recommend",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-recommend-desktop"
+    },
+    {
+      "route": "/recommend/1",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-recommend-1-desktop"
+    },
+    {
+      "route": "/jobs",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-jobs-desktop"
+    },
+    {
+      "route": "/jobs/1",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-jobs-1-desktop"
+    },
+    {
+      "route": "/applications",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-applications-desktop"
+    },
+    {
+      "route": "/favorites",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-favorites-desktop"
+    },
+    {
+      "route": "/ai/interview",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-ai-interview-desktop"
+    },
+    {
+      "route": "/resume/edit/1",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-resume-edit-1-desktop"
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user--mobile"
+    },
+    {
+      "route": "/profile",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-profile-mobile"
+    },
+    {
+      "route": "/resume",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-resume-mobile"
+    },
+    {
+      "route": "/resume/edit",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-resume-edit-mobile"
+    },
+    {
+      "route": "/resume/analysis",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-resume-analysis-mobile"
+    },
+    {
+      "route": "/recommend",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-recommend-mobile"
+    },
+    {
+      "route": "/recommend/1",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-recommend-1-mobile"
+    },
+    {
+      "route": "/jobs",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-jobs-mobile"
+    },
+    {
+      "route": "/jobs/1",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-jobs-1-mobile"
+    },
+    {
+      "route": "/applications",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-applications-mobile"
+    },
+    {
+      "route": "/favorites",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-favorites-mobile"
+    },
+    {
+      "route": "/ai/interview",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-ai-interview-mobile"
+    },
+    {
+      "route": "/resume/edit/1",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "user-resume-edit-1-mobile"
+    },
+    {
+      "route": "/company",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-desktop"
+    },
+    {
+      "route": "/company/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-profile-desktop"
+    },
+    {
+      "route": "/company/jobs",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-jobs-desktop"
+    },
+    {
+      "route": "/company/jobs/create",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-jobs-create-desktop"
+    },
+    {
+      "route": "/company/applications",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-applications-desktop"
+    },
+    {
+      "route": "/company/candidates",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-candidates-desktop"
+    },
+    {
+      "route": "/company",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-mobile"
+    },
+    {
+      "route": "/company/profile",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-profile-mobile"
+    },
+    {
+      "route": "/company/jobs",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-jobs-mobile"
+    },
+    {
+      "route": "/company/jobs/create",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-jobs-create-mobile"
+    },
+    {
+      "route": "/company/applications",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-applications-mobile"
+    },
+    {
+      "route": "/company/candidates",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "company-company-candidates-mobile"
+    },
+    {
+      "route": "/admin",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-desktop"
+    },
+    {
+      "route": "/admin/users",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-users-desktop"
+    },
+    {
+      "route": "/admin/companies",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-companies-desktop"
+    },
+    {
+      "route": "/admin/jobs",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-jobs-desktop"
+    },
+    {
+      "route": "/admin/resumes",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-resumes-desktop"
+    },
+    {
+      "route": "/admin/applications",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-applications-desktop"
+    },
+    {
+      "route": "/admin/reports",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-reports-desktop"
+    },
+    {
+      "route": "/admin/logs",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-logs-desktop"
+    },
+    {
+      "route": "/admin/settings",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-settings-desktop"
+    },
+    {
+      "route": "/admin",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-mobile"
+    },
+    {
+      "route": "/admin/users",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-users-mobile"
+    },
+    {
+      "route": "/admin/companies",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-companies-mobile"
+    },
+    {
+      "route": "/admin/jobs",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-jobs-mobile"
+    },
+    {
+      "route": "/admin/resumes",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-resumes-mobile"
+    },
+    {
+      "route": "/admin/applications",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-applications-mobile"
+    },
+    {
+      "route": "/admin/reports",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-reports-mobile"
+    },
+    {
+      "route": "/admin/logs",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-logs-mobile"
+    },
+    {
+      "route": "/admin/settings",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "ok": true,
+      "overflow": false,
+      "apiErrors": [],
+      "name": "admin-admin-settings-mobile"
+    }
+  ],
+  "browserIssues": []
+}

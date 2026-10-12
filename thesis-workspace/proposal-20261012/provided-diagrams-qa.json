@@ -1,0 +1,23 @@
+[
+  {
+    "source": "G:\\project\\img\\结构图\\结构图——用户.png",
+    "embedded": "word/media/provided-structure-1.png",
+    "sha256": "f85cbf64a0caf6d45aa9796a24a425493fc990ff1dd9c5b51f502f8c59e62b2c",
+    "width_cm": 16,
+    "height_cm": 13.100855555555556
+  },
+  {
+    "source": "G:\\project\\img\\结构图\\结构图——企业.png",
+    "embedded": "word/media/provided-structure-2.png",
+    "sha256": "fd2c1972522b55f45264ae81130bdeebdf0885a9dff58ff8edea68abb360ae61",
+    "width_cm": 16,
+    "height_cm": 12.51063888888889
+  },
+  {
+    "source": "G:\\project\\img\\结构图\\结构图——管理员.png",
+    "embedded": "word/media/provided-structure-3.png",
+    "sha256": "565196f1b825c6d9ac480b292398a8cd7bee6eebb40bf2d102e6e5f309afeaa4",
+    "width_cm": 16,
+    "height_cm": 13.585513888888888
+  }
+]
