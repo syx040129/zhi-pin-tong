@@ -4,11 +4,32 @@ import com.example.recruitment.ai.config.AiProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.beans.factory.ObjectProvider;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class EmbeddingClientTest {
+    @Test
+    void batchUsesOneProviderCallAndFallsBackAsAWholeOnInvalidVectors() {
+        var model = mock(EmbeddingModel.class);
+        ObjectProvider<EmbeddingModel> provider = mock(ObjectProvider.class);
+        when(provider.getIfAvailable()).thenReturn(model);
+        when(model.embed(anyList())).thenReturn(List.of(new float[]{1, 0}, new float[]{1, 0}, new float[]{0, 1}));
+        var properties = realProperties();
+        var client = new EmbeddingClient(properties, provider);
+        var result = client.similarities("Java", List.of("Java", "Python"));
+        assertEquals(List.of(100, 0), result.stream().map(EmbeddingClient.SimilarityResult::score).toList());
+        assertTrue(result.stream().allMatch(r -> r.source().equals("EMBEDDING")));
+        verify(model).embed(List.of("Java", "Java", "Python"));
+        verify(model, never()).embed(anyString());
+        when(model.embed(anyList())).thenReturn(List.of(new float[]{1, 0}, new float[]{Float.NaN}, new float[]{0, 1}));
+        var fallback = client.similarities("Java", List.of("Java", "Python"));
+        assertTrue(fallback.stream().allMatch(r -> r.source().equals("FALLBACK")));
+        properties.setMock(true);
+        assertEquals(client.similarities("Java", List.of("Java", "Python")).stream().map(EmbeddingClient.SimilarityResult::score).toList(),
+                fallback.stream().map(EmbeddingClient.SimilarityResult::score).toList());
+    }
     @Test
     void secondCallFailureRecomputesBothVectorsLocally() {
         AiProperties properties = realProperties();

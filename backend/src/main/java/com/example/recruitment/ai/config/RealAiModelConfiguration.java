@@ -9,6 +9,10 @@ import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Bean;
+import org.springframework.boot.web.client.RestClientCustomizer;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import java.time.Duration;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /** 仅在业务真实模式下装配模型，避免 Mock / 空密钥触发框架的密钥校验。 */
@@ -16,6 +20,17 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @Conditional(RealAiModelConfiguration.RealModeCondition.class)
 @Import(OpenAiChatAutoConfiguration.class)
 public class RealAiModelConfiguration {
+
+    /** Chat 与 Embedding 的同步 HTTP 调用均应用连接/读取超时。 */
+    @Bean
+    RestClientCustomizer aiTimeoutCustomizer(AiProperties properties) {
+        return builder -> {
+            var factory = new SimpleClientHttpRequestFactory();
+            factory.setConnectTimeout(Duration.ofSeconds(Math.min(5, properties.getTimeoutSeconds())));
+            factory.setReadTimeout(Duration.ofSeconds(properties.getTimeoutSeconds()));
+            builder.requestFactory(factory);
+        };
+    }
 
     @Configuration(proxyBeanMethods = false)
     @Conditional(RealModeCondition.class)

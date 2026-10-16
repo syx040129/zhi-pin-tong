@@ -2,7 +2,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import type { RecommendItemVO, ResumeVO } from '@/types/api'
+import type { RecommendationQuery, RecommendItemVO, ResumeVO } from '@/types/api'
 import { getRecommendations, refreshRecommendations } from '@/api/ai'
 import { listResumes } from '@/api/resume'
 import { apply } from '@/api/application'
@@ -17,6 +17,12 @@ const list = ref<RecommendItemVO[]>([])
 const loading = ref(true)
 const refreshing = ref(false)
 const hasResume = ref<boolean | null>(null)
+const resumesFailed = ref(false)
+const failed = ref(false)
+const filters = reactive<RecommendationQuery>({})
+const activeQuery = ref<RecommendationQuery>({})
+const appliedJobs = ref(new Set<number>())
+let requestId = 0
 
 const weights = [
   { label: '语义理解', percent: 50, color: '#4f6bf6' },
@@ -32,39 +38,75 @@ const medalColors = [
 ]
 
 async function loadResumes(): Promise<void> {
+  resumesFailed.value = false
   try {
     resumes.value = await listResumes()
     hasResume.value = resumes.value.length > 0
   } catch {
     resumes.value = []
-    hasResume.value = false
+    hasResume.value = null
+    resumesFailed.value = true
   }
 }
 
-async function loadRecommendations(): Promise<void> {
+async function loadRecommendations(force = false): Promise<void> {
+  const id = ++requestId
   loading.value = true
+  refreshing.value = force
+  failed.value = false
   try {
-    const data = await getRecommendations()
+    const data = await (force ? refreshRecommendations(activeQuery.value) : getRecommendations(activeQuery.value))
+    if (id !== requestId) return
     list.value = data ?? []
+    if (force) ElMessage.success('推荐结果已刷新')
   } catch {
+    if (id !== requestId) return
     list.value = []
+    failed.value = true
   } finally {
-    loading.value = false
+    if (id === requestId) {
+      loading.value = false
+      refreshing.value = false
+    }
   }
 }
 
 async function refresh(): Promise<void> {
-  if (refreshing.value) return
-  refreshing.value = true
-  try {
-    const data = await refreshRecommendations()
-    list.value = data ?? []
-    ElMessage.success('推荐结果已刷新')
-  } catch {
-    /* 提示由拦截器处理 */
-  } finally {
-    refreshing.value = false
+  if (!loading.value) await loadRecommendations(true)
+}
+
+async function applyFilters(): Promise<void> {
+  if (filters.salaryMin != null && filters.salaryMax != null && filters.salaryMax < filters.salaryMin) {
+    ElMessage.warning('最高薪资不能低于最低薪资')
+    return
   }
+  activeQuery.value = {
+    resumeId: filters.resumeId,
+    city: filters.city?.trim() || undefined,
+    jobType: filters.jobType?.trim() || undefined,
+    salaryMin: filters.salaryMin,
+    salaryMax: filters.salaryMax,
+  }
+  await loadRecommendations()
+}
+
+async function resetFilters(): Promise<void> {
+  for (const key of Object.keys(filters) as (keyof RecommendationQuery)[]) delete filters[key]
+  activeQuery.value = {}
+  await loadRecommendations()
+}
+
+async function initialize(): Promise<void> {
+  loading.value = true
+  await loadResumes()
+  if (hasResume.value) await loadRecommendations()
+  else loading.value = false
+}
+
+function sourceLabel(item: RecommendItemVO): string {
+  if (item.source === 'CACHED') return '历史缓存'
+  if (item.source === 'FALLBACK') return '降级计算'
+  return item.semanticSource === 'EMBEDDING' ? '模型向量计算' : '本地规则计算'
 }
 
 /* ===== 投递弹窗 ===== */
@@ -76,8 +118,9 @@ const applyForm = reactive({
 })
 
 function openApply(item: RecommendItemVO): void {
+  if (appliedJobs.value.has(item.jobId)) return
   applyTarget.value = item
-  if (resumes.value.length > 0) applyForm.resumeId = resumes.value[0].id
+  applyForm.resumeId = item.resumeId || resumes.value[0]?.id
   applyForm.coverLetter = ''
 }
 
@@ -100,6 +143,7 @@ async function submitApply(): Promise<void> {
       coverLetter: applyForm.coverLetter.trim() || undefined,
     })
     ElMessage.success('投递成功，祝你早日拿到 offer！')
+    appliedJobs.value.add(target.jobId)
     applyTarget.value = null
   } catch {
     /* 提示由拦截器处理 */
@@ -124,11 +168,7 @@ function scoreColor(score: number): string {
   return '#ef4444'
 }
 
-onMounted(async () => {
-  await loadResumes()
-  if (hasResume.value) await loadRecommendations()
-  else loading.value = false
-})
+onMounted(initialize)
 </script>
 
 <template>
@@ -164,7 +204,10 @@ onMounted(async () => {
       </div>
 
       <!-- 无简历引导 -->
-      <div v-if="hasResume === false" class="panel no-resume">
+      <el-result v-if="resumesFailed" icon="error" title="简历加载失败" sub-title="暂时无法读取简历，请重试">
+        <template #extra><el-button type="primary" @click="initialize">重新加载</el-button></template>
+      </el-result>
+      <div v-else-if="hasResume === false" class="panel no-resume">
         <el-empty :image-size="130" description="还没有简历，无法进行智能匹配">
           <p class="no-resume__hint">上传或创建简历后，AI 才能理解你的技能与经历</p>
           <el-button type="primary" size="large" @click="router.push('/resume/edit')">
@@ -174,21 +217,39 @@ onMounted(async () => {
       </div>
 
       <template v-else>
+        <el-form v-if="hasResume" class="panel preference-form" label-position="top" @submit.prevent="applyFilters">
+          <div class="preference-fields">
+            <el-form-item label="用于推荐的简历">
+              <el-select v-model="filters.resumeId" clearable placeholder="默认使用最新简历" :disabled="loading">
+                <el-option v-for="resume in resumes" :key="resume.id" :value="resume.id" :label="resume.name || `简历 #${resume.id}`" />
+              </el-select>
+            </el-form-item>
+            <el-form-item label="期望城市"><el-input v-model="filters.city" maxlength="50" clearable placeholder="如：北京" :disabled="loading" /></el-form-item>
+            <el-form-item label="岗位方向"><el-input v-model="filters.jobType" maxlength="50" clearable placeholder="如：后端开发" :disabled="loading" /></el-form-item>
+            <el-form-item label="最低月薪（K）"><el-input-number v-model="filters.salaryMin" :min="0" :max="10000" :step="1" :controls="false" :disabled="loading" /></el-form-item>
+            <el-form-item label="最高月薪（K）"><el-input-number v-model="filters.salaryMax" :min="0" :max="10000" :step="1" :controls="false" :disabled="loading" /></el-form-item>
+          </div>
+          <el-button type="primary" native-type="submit" :disabled="loading">按意向推荐</el-button>
+          <el-button :disabled="loading" @click="resetFilters">重置筛选</el-button>
+        </el-form>
         <!-- 列表头 -->
         <div class="rec-head">
           <div>
             <h2 class="rec-head__title">为你推荐的职位</h2>
             <p class="rec-head__desc">按匹配评分排序，结合职位要求与个人意向进行选择</p>
           </div>
-          <el-button :loading="refreshing" @click="refresh">
+          <el-button :loading="refreshing" :disabled="loading" @click="refresh">
             <el-icon><Refresh /></el-icon>刷新推荐
           </el-button>
         </div>
 
         <div v-loading="loading" class="rec-list">
+          <el-result v-if="failed && !loading" icon="error" title="推荐加载失败" sub-title="暂时无法获取推荐结果，请重试">
+            <template #extra><el-button type="primary" @click="loadRecommendations()">重新加载</el-button></template>
+          </el-result>
           <el-empty
-            v-if="!loading && list.length === 0"
-            description="暂时没有合适的推荐岗位"
+            v-else-if="!loading && list.length === 0"
+            description="当前意向下暂无推荐岗位，可调整筛选条件"
           >
             <el-button type="primary" @click="refresh">刷新推荐结果</el-button>
           </el-empty>
@@ -274,18 +335,23 @@ onMounted(async () => {
                 </el-tag>
               </div>
 
-              <p class="rec-card__reason" :title="item.reason">{{ item.reason }}</p>
+              <div class="rec-card__reason">
+                <el-tooltip :content="item.executionNote || sourceLabel(item)">
+                  <el-tag size="small" :type="item.source === 'FALLBACK' ? 'warning' : 'info'">{{ sourceLabel(item) }}</el-tag>
+                </el-tooltip>
+                <p :title="item.reason">{{ item.reason }}</p>
+              </div>
 
               <div class="rec-card__actions">
                 <el-button text type="primary" @click="router.push(`/jobs/${item.jobId}`)">
                   查看岗位
                 </el-button>
-                <el-button text type="success" @click="router.push(`/recommend/${item.jobId}`)">
+                <el-button text type="success" @click="router.push({ path: `/recommend/${item.jobId}`, query: { resumeId: item.resumeId } })">
                   <el-icon><DataAnalysis /></el-icon>匹配分析
                 </el-button>
                 <el-button text @click="router.push({ path: '/ai/interview', query: { jobId: item.jobId } })">模拟面试</el-button>
-                <button class="grad-btn apply-btn" type="button" @click="openApply(item)">
-                  <el-icon><Promotion /></el-icon>投递
+                <button class="grad-btn apply-btn" type="button" :disabled="appliedJobs.has(item.jobId)" @click="openApply(item)">
+                  <el-icon><Promotion /></el-icon>{{ appliedJobs.has(item.jobId) ? '已投递' : '投递' }}
                 </button>
               </div>
             </div>
@@ -343,6 +409,12 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.preference-form { margin-top: 20px; padding: 20px; }
+.preference-fields { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.preference-fields :deep(.el-input-number) { width: 100%; }
+.apply-btn:disabled { opacity: 0.55; cursor: default; }
+@media (max-width: 1000px) { .preference-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .preference-fields { grid-template-columns: 1fr; } }
 .recommend__inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -656,6 +728,10 @@ onMounted(async () => {
   font-size: 12px;
   line-height: 1.8;
   flex: none;
+}
+
+.rec-card__reason p {
+  margin: 6px 0 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

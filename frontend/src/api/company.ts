@@ -6,6 +6,9 @@ import type {
   CompanyForm,
   CompanyStats,
   CompanyVO,
+  PublicCompanyVO,
+  CompanyQuery,
+  CompanyFiltersVO,
   JobForm,
   JobStatus,
   JobVO,
@@ -47,8 +50,16 @@ export function companyStats(): Promise<CompanyStats> {
 }
 
 /** 公开企业信息（含在线岗位数） */
-export function publicCompany(id: number): Promise<CompanyVO> {
-  return request.get<CompanyVO>(`/companies/${id}`)
+export function publicCompany(id: number): Promise<PublicCompanyVO> {
+  return request.get<PublicCompanyVO>(`/companies/${id}`)
+}
+
+export function pageCompanies(params: CompanyQuery): Promise<PageResult<PublicCompanyVO>> {
+  return request.get<PageResult<PublicCompanyVO>>('/companies', { params })
+}
+
+export function companyFilters(): Promise<CompanyFiltersVO> {
+  return request.get<CompanyFiltersVO>('/companies/filters')
 }
 
 /* ===== 企业岗位管理 ===== */

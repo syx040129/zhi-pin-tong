@@ -1,6 +1,9 @@
 package com.example.recruitment.ai.service;
 
 import com.example.recruitment.ai.config.AiProperties;
+import com.example.recruitment.ai.dto.MatchResultVO;
+import com.example.recruitment.ai.dto.RecommendationQuery;
+import com.example.recruitment.common.exception.BusinessException;
 import com.example.recruitment.ai.entity.AiRecommendation;
 import com.example.recruitment.ai.mapper.AiRecommendationMapper;
 import com.example.recruitment.company.mapper.CompanyMapper;
@@ -14,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -24,13 +28,57 @@ class RecommendationServiceTest {
     private final JobSkillMapper skills = mock(JobSkillMapper.class);
     private final CompanyMapper companies = mock(CompanyMapper.class);
     private final ResumeMapper resumes = mock(ResumeMapper.class);
+    private final JobMatchService matches = mock(JobMatchService.class);
+    private final AiProperties properties = new AiProperties();
     private final RecommendationService service = new RecommendationService(recs, jobs, skills, companies,
-            resumes, mock(JobMatchService.class), new AiProperties());
+            resumes, matches, properties);
+
+    @Test
+    void personalizedResumeMustBelongToCurrentUser() {
+        Resume foreign = new Resume(); foreign.setUserId(3L);
+        when(resumes.selectById(99L)).thenReturn(foreign);
+        RecommendationQuery query = new RecommendationQuery(); query.setResumeId(99L);
+        assertThrows(BusinessException.class, () -> service.recommendations(2L, false, query));
+        verifyNoInteractions(jobs, recs, matches);
+    }
+
+    @Test
+    void skillCoverageRanksEntirePoolAndPersonalizationDoesNotOverwriteDefaultCache() {
+        Resume resume = new Resume(); resume.setId(99L); resume.setUserId(2L); resume.setSkills("Java, Spring Boot");
+        when(resumes.selectById(99L)).thenReturn(resume);
+        Job weak = new Job(); weak.setId(10L); weak.setCompanyId(5L);
+        Job strong = new Job(); strong.setId(1L); strong.setCompanyId(5L);
+        JobSkill java = new JobSkill(); java.setJobId(1L); java.setSkillName("Java");
+        JobSkill python = new JobSkill(); python.setJobId(10L); python.setSkillName("Python");
+        when(jobs.selectList(any())).thenReturn(List.of(weak, strong));
+        when(skills.selectList(any())).thenReturn(List.of(java, python));
+        when(companies.selectBatchIds(any())).thenReturn(List.of());
+        MatchResultVO match = new MatchResultVO(); match.setMatchScore(90); match.setSource("RULE");
+        when(matches.computeBatch(eq(resume), anyList(), anyMap())).thenReturn(Map.of(1L, match));
+        properties.setRecommendPoolSize(1);
+        RecommendationQuery query = new RecommendationQuery(); query.setResumeId(99L); query.setCity("北京");
+        var results = service.recommendations(2L, false, query);
+        assertEquals(1L, results.get(0).getJobId());
+        assertEquals(99L, results.get(0).getResumeId());
+        assertEquals("RULE", results.get(0).getSource());
+        verify(matches).computeBatch(eq(resume), eq(List.of(strong)), anyMap());
+        verifyNoInteractions(recs);
+        verify(companies, never()).selectById(any());
+    }
+
+    @Test
+    void invalidSalaryRangeRejectedBeforeDatabaseAccess() {
+        RecommendationQuery query = new RecommendationQuery(); query.setSalaryMin(20); query.setSalaryMax(10);
+        assertThrows(BusinessException.class, () -> service.recommendations(2L, false, query));
+        verifyNoInteractions(resumes, recs, jobs);
+    }
 
     @Test
     void cachedSkillsUseUsersResumeAndOfflineJobsAreFiltered() {
         Resume resume = new Resume(); resume.setId(99L); resume.setUserId(2L); resume.setSkills("Spring Boot,Java");
         AiRecommendation first = cached(7L); AiRecommendation second = cached(8L);
+        // MySQL DATETIME 为秒精度：同一秒完成的简历保存与推荐写入仍可使用缓存。
+        resume.setUpdateTime(first.getCreateTime()); second.setCreateTime(first.getCreateTime());
         Job online = new Job(); online.setId(7L); online.setStatus("ONLINE"); online.setCompanyId(5L);
         Job offline = new Job(); offline.setId(8L); offline.setStatus("OFFLINE"); offline.setCompanyId(5L);
         JobSkill skill = new JobSkill(); skill.setJobId(7L); skill.setSkillName("springboot");
@@ -42,6 +90,8 @@ class RecommendationServiceTest {
         var results = service.recommendations(2L, false);
         assertEquals(1, results.size());
         assertEquals(List.of("springboot"), results.get(0).getMatchedSkills());
+        assertEquals("CACHED", results.get(0).getSource());
+        verify(jobs, never()).selectList(any());
         verify(resumes, never()).selectById(2L);
     }
 

@@ -80,6 +80,7 @@ export interface JobSkill {
 
 export interface JobQuery {
   keyword?: string
+  companyId?: number
   city?: string
   jobType?: string
   education?: string
@@ -203,6 +204,32 @@ export interface ResumeParseVO {
 }
 
 /* ===== 企业 ===== */
+
+export interface PublicCompanyVO {
+  id: number
+  companyName: string
+  logo?: string | null
+  industry?: string | null
+  scale?: string | null
+  address?: string | null
+  description?: string | null
+  website?: string | null
+  jobCount: number
+}
+
+export interface CompanyQuery {
+  keyword?: string
+  industry?: string
+  scale?: string
+  includeInactiveHiring?: boolean
+  page?: number
+  size?: number
+}
+
+export interface CompanyFiltersVO {
+  industries: string[]
+  scales: string[]
+}
 
 export interface CompanyForm {
   companyName: string
@@ -375,6 +402,14 @@ export interface MatchResultVO {
   executionNote: string
 }
 
+export interface RecommendationQuery {
+  resumeId?: number
+  city?: string
+  jobType?: string
+  salaryMin?: number
+  salaryMax?: number
+}
+
 export interface RecommendItemVO {
   jobId: number
   jobName: string
@@ -395,6 +430,10 @@ export interface RecommendItemVO {
   matchedSkills: string[]
   missingSkills: string[]
   reason: string
+  resumeId: number
+  source: AiSource | 'CACHED'
+  semanticSource: 'EMBEDDING' | 'LOCAL' | 'FALLBACK' | 'CACHED'
+  executionNote: string
 }
 
 /* ===== AI：模拟面试 ===== */

@@ -12,6 +12,8 @@ const LoginView = () => import('@/views/auth/LoginView.vue')
 const RegisterView = () => import('@/views/auth/RegisterView.vue')
 const JobListView = () => import('@/views/job/JobListView.vue')
 const JobDetailView = () => import('@/views/job/JobDetailView.vue')
+const PublicCompanyListView = () => import('@/views/company/PublicCompanyListView.vue')
+const PublicCompanyDetailView = () => import('@/views/company/PublicCompanyDetailView.vue')
 const ProfileView = () => import('@/views/user/ProfileView.vue')
 const ResumeListView = () => import('@/views/user/resume/ResumeListView.vue')
 const ResumeEditView = () => import('@/views/user/resume/ResumeEditView.vue')
@@ -58,6 +60,8 @@ const routes: RouteRecordRaw[] = [
     component: UserLayout,
     children: [
       { path: '', name: 'Home', component: HomeView, meta: { title: '首页' } },
+      { path: 'companies', name: 'PublicCompanyList', component: PublicCompanyListView, meta: { title: '找公司' } },
+      { path: 'companies/:id', name: 'PublicCompanyDetail', component: PublicCompanyDetailView, meta: { title: '企业详情' } },
       {
         path: 'jobs',
         name: 'JobList',

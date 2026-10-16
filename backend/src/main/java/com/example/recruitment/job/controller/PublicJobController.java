@@ -8,6 +8,7 @@ import com.example.recruitment.job.service.JobService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,9 @@ public class PublicJobController {
 
     private final JobService jobService;
 
-    @Operation(summary = "岗位搜索/分页", description = "支持关键词、城市、类型、学历、经验、薪资区间筛选")
+    @Operation(summary = "岗位搜索/分页", description = "关键词匹配岗位名称、类型、企业名称及技能；支持企业ID、城市、学历、经验、薪资区间筛选")
     @GetMapping("/page")
-    public Result<PageResult<JobVO>> page(JobQuery query) {
+    public Result<PageResult<JobVO>> page(@Valid JobQuery query) {
         return Result.ok(jobService.publicPage(query));
     }
 

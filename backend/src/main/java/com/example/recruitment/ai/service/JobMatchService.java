@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -54,6 +55,29 @@ public class JobMatchService {
 
     public MatchResultVO computeWithSkills(Resume resume, Job job, List<JobSkill> jobSkills,
                                            boolean wantReason) {
+        List<ResumeExperience> experiences = loadExperiences(resume.getId());
+        var semantic = embeddingClient.similarity(buildResumeText(resume, experiences), buildJobText(job, jobSkills));
+        return computePrepared(resume, job, jobSkills, experiences, semantic, wantReason);
+    }
+
+    /** 一批岗位只读取一次简历经历，并在同一个向量空间批量计算。 */
+    public Map<Long, MatchResultVO> computeBatch(Resume resume, List<Job> jobs, Map<Long, List<JobSkill>> skills) {
+        if (jobs.isEmpty()) return Map.of();
+        List<ResumeExperience> experiences = loadExperiences(resume.getId());
+        var semantics = embeddingClient.similarities(buildResumeText(resume, experiences), jobs.stream()
+                .map(job -> buildJobText(job, skills.getOrDefault(job.getId(), List.of()))).toList());
+        Map<Long, MatchResultVO> results = new LinkedHashMap<>();
+        for (int i = 0; i < jobs.size(); i++) {
+            Job job = jobs.get(i);
+            results.put(job.getId(), computePrepared(resume, job, skills.getOrDefault(job.getId(), List.of()),
+                    experiences, semantics.get(i), false));
+        }
+        return results;
+    }
+
+    private MatchResultVO computePrepared(Resume resume, Job job, List<JobSkill> jobSkills,
+                                         List<ResumeExperience> experiences,
+                                         EmbeddingClient.SimilarityResult semantic, boolean wantReason) {
         Set<String> resumeSkills = new HashSet<>();
         for (String s : ResumeService.splitSkills(resume.getSkills())) {
             resumeSkills.add(normalize(s));
@@ -78,10 +102,8 @@ public class JobMatchService {
         int skillScore = totalWeight == 0 ? 100
                 : Math.round(matchedWeight * 100f / totalWeight);
 
-        List<ResumeExperience> experiences = loadExperiences(resume.getId());
         int experienceScore = scoreExperience(job, experiences, resume);
         int educationScore = scoreEducation(job.getEducation(), resume.getEducation());
-        var semantic = embeddingClient.similarity(buildResumeText(resume, experiences), buildJobText(job, jobSkills));
         int semanticScore = semantic.score();
 
         int matchScore = Math.round(semanticScore * 0.5f + skillScore * 0.25f
@@ -172,7 +194,7 @@ public class JobMatchService {
         long workCount = experiences.stream()
                 .filter(e -> "WORK".equals(e.getType()) || "INTERNSHIP".equals(e.getType())).count();
         long projectCount = experiences.stream().filter(e -> "PROJECT".equals(e.getType())).count();
-        int level = EXPERIENCE_LEVEL.getOrDefault(job.getExperience(), 0);
+        int level = EXPERIENCE_LEVEL.getOrDefault(job.getExperience() == null ? "" : job.getExperience(), 0);
         int base;
         if (level == 0) {
             base = 95;

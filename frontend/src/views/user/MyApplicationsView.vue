@@ -25,10 +25,12 @@ const total = ref(0)
 const page = ref(1)
 const size = 6
 const loading = ref(false)
+const failed = ref(false)
 const busyId = ref<number | null>(null)
 
 async function load(): Promise<void> {
   loading.value = true
+  failed.value = false
   try {
     const res = await myApplications({
       status: status.value ? (status.value as ApplicationStatus) : undefined,
@@ -38,6 +40,7 @@ async function load(): Promise<void> {
     list.value = res.records
     total.value = res.total
   } catch {
+    failed.value = true
     list.value = []
     total.value = 0
   } finally {
@@ -110,8 +113,11 @@ onMounted(load)
       </div>
 
       <div v-loading="loading" class="list-area">
+        <el-result v-if="failed && !loading" icon="error" title="投递记录加载失败" sub-title="暂时无法读取投递记录，请重试">
+          <template #extra><el-button type="primary" @click="load">重新加载</el-button></template>
+        </el-result>
         <el-empty
-          v-if="!loading && list.length === 0"
+          v-else-if="!loading && list.length === 0"
           description="还没有投递记录，去看看心仪的岗位吧"
         >
           <el-button type="primary" @click="router.push('/jobs')">去逛职位</el-button>

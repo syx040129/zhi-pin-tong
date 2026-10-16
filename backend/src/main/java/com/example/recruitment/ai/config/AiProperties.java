@@ -4,12 +4,16 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 
 /**
  * AI 配置属性（application.yml 中 ai.* 前缀）
  */
 @Data
 @Component
+@Validated
 @ConfigurationProperties(prefix = "ai")
 public class AiProperties {
 
@@ -25,9 +29,13 @@ public class AiProperties {
     /** 是否调用真实 Embedding 模型；关闭时使用本地向量 */
     private boolean embeddingEnabled = true;
     private double temperature = 0.4;
+    @Min(1)
     private int maxTokens = 2000;
+    @Min(1) @Max(120)
     private int timeoutSeconds = 30;
+    @Min(1) @Max(200)
     private int recommendPoolSize = 20;
+    @Min(1) @Max(100)
     private int recommendLimit = 10;
 
     /**

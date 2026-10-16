@@ -7,7 +7,7 @@ const auth = useAuthStore()
 const route = useRoute()
 const router = useRouter()
 const menuOpen = ref(false)
-const navItems = [{ path:'/',label:'首页' },{ path:'/jobs',label:'找工作' },{ path:'/recommend',label:'岗位推荐' },{ path:'/resume',label:'我的简历' },{ path:'/ai/interview',label:'面试练习' }]
+const navItems = [{ path:'/',label:'首页' },{ path:'/jobs',label:'找工作' },{ path:'/companies',label:'找公司' },{ path:'/recommend',label:'岗位推荐' },{ path:'/resume',label:'我的简历' },{ path:'/ai/interview',label:'面试练习' }]
 const displayName = computed(() => auth.user?.nickname || auth.user?.companyName || auth.user?.username || '用户')
 watch(() => route.fullPath, () => { menuOpen.value = false })
 function handleCommand(command:string) {
@@ -43,5 +43,5 @@ function isActive(path:string) { return path === '/' ? route.path === '/' : rout
 .mobile-navigation { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px; padding:8px 16px 16px; border-top:1px solid var(--c-border); }.mobile-navigation a { padding:12px; border-radius:6px; }.mobile-navigation a.active { color:var(--c-primary); background:var(--c-primary-soft); }
 .site-footer { border-top:1px solid var(--c-border); max-width:1200px; margin:auto; padding:30px 24px 36px; display:flex; gap:28px; align-items:center; color:var(--c-text-2); font-size:12px; }.site-footer > div { display:flex; gap:18px; align-items:center; }.site-footer nav { display:flex; gap:20px; margin-left:auto; }.site-footer a:hover { color:var(--c-primary); }
 @media(max-width:1000px) { .site-header__inner { gap:28px; }.site-nav { gap:18px; }.employer-link { display:none; } }
-@media(max-width:760px) { .site-header__inner { height:64px; padding:0 16px; gap:12px; }.site-nav { display:none; }.mobile-menu-toggle { display:inline-flex; align-items:center; justify-content:center; }.header-actions { gap:10px; }.account-button > span:not(.el-avatar),.account-button > .el-icon { display:none; }.site-footer { margin:0 16px; padding:24px 0 80px; flex-wrap:wrap; gap:18px; }.site-footer nav { margin-left:0; }.site-footer small { width:100%; } }
+@media(max-width:980px) { .site-header__inner { height:64px; padding:0 16px; gap:12px; }.site-nav { display:none; }.mobile-menu-toggle { display:inline-flex; align-items:center; justify-content:center; }.header-actions { gap:10px; }.account-button > span:not(.el-avatar),.account-button > .el-icon { display:none; }.site-footer { margin:0 16px; padding:24px 0 80px; flex-wrap:wrap; gap:18px; }.site-footer nav { margin-left:0; }.site-footer small { width:100%; } }
 </style>

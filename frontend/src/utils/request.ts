@@ -30,6 +30,11 @@ const service = axios.create({
 
 // 请求拦截：附加 Bearer token
 service.interceptors.request.use((config) => {
+  // AI 匹配可能依次调用向量与理由生成，预留后端超时及降级的时间。
+  if (config.url?.startsWith('/ai/') && config.timeout === 20000) {
+    const configuredTimeout = Number(import.meta.env.VITE_AI_TIMEOUT_MS)
+    config.timeout = Number.isFinite(configuredTimeout) && configuredTimeout >= 1000 ? configuredTimeout : 120000
+  }
   const token = getToken()
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
@@ -75,7 +80,9 @@ service.interceptors.response.use(
     // 网络层 / HTTP 非 2xx 错误
     const status = error?.response?.status as number | undefined
     const message =
-      error?.response?.data?.message || error?.message || '网络异常，请检查网络后重试'
+      error?.response?.data?.message ||
+      (error?.code === 'ECONNABORTED' ? '请求超时，请稍后重试；可先查看记录确认是否已完成' :
+        error?.message || '网络异常，请检查网络后重试')
     ElMessage.error(message)
     if (status === 401) {
       clearToken()

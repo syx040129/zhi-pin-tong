@@ -33,6 +33,7 @@ const salaryOptions = [
 
 const filters = reactive({
   keyword: '',
+  companyId: undefined as number | undefined,
   city: '',
   jobType: '',
   education: '',
@@ -53,6 +54,8 @@ const favBusyId = ref<number | null>(null)
 function syncFromQuery(): void {
   const q = route.query
   filters.keyword = typeof q.keyword === 'string' ? q.keyword : ''
+  const companyId = typeof q.companyId === 'string' ? Number(q.companyId) : NaN
+  filters.companyId = Number.isSafeInteger(companyId) && companyId > 0 ? companyId : undefined
   filters.city = typeof q.city === 'string' ? q.city : ''
   filters.jobType = typeof q.jobType === 'string' ? q.jobType : ''
   filters.education = typeof q.education === 'string' ? q.education : ''
@@ -66,6 +69,7 @@ function syncFromQuery(): void {
 function buildParams(): Partial<JobQuery> {
   return {
     keyword: filters.keyword.trim() || undefined,
+    companyId: filters.companyId,
     city: filters.city || undefined,
     jobType: filters.jobType || undefined,
     education: filters.education || undefined,
@@ -102,6 +106,7 @@ function doSearch(): void {
   const query: Record<string, string> = {}
   const keyword = filters.keyword.trim()
   if (keyword) query.keyword = keyword
+  if (filters.companyId) query.companyId = String(filters.companyId)
   if (filters.city) query.city = filters.city
   if (filters.jobType) query.jobType = filters.jobType
   if (filters.education) query.education = filters.education
@@ -121,6 +126,7 @@ function doSearch(): void {
 
 function clearFilters(): void {
   filters.keyword = ''
+  filters.companyId = undefined
   filters.city = ''
   filters.jobType = ''
   filters.education = ''
@@ -186,11 +192,15 @@ function jobSalary(job: JobVO): string {
       </div>
 
       <div class="panel filter-card">
+        <div v-if="filters.companyId" class="filter-row">
+          <router-link :to="`/companies/${filters.companyId}`">正在查看指定企业的职位 · 查看企业</router-link>
+          <el-button text type="primary" @click="filters.companyId = undefined; doSearch()">移除企业筛选</el-button>
+        </div>
         <div class="filter-row">
           <el-input
-            v-model="filters.keyword" aria-label="职位关键词"
+            v-model="filters.keyword" aria-label="职位、公司或技能关键词"
             class="filter-keyword"
-            placeholder="职位关键词（如：前端、Java）"
+            placeholder="搜索职位、公司名称或技能"
             clearable
             @keyup.enter="doSearch"
           >
@@ -262,7 +272,7 @@ function jobSalary(job: JobVO): string {
                 </el-avatar>
                 <div class="job-card__main">
                   <router-link :to="`/jobs/${job.id}`" class="job-card__name" :title="job.jobName">{{ job.jobName }}</router-link>
-                  <div class="job-card__company" :title="job.companyName">{{ job.companyName }}</div>
+                  <router-link :to="`/companies/${job.companyId}`" class="job-card__company" :title="job.companyName">{{ job.companyName }}</router-link>
                 </div>
                 <div class="job-card__salary grad-text">{{ jobSalary(job) }}</div>
                 <div class="job-card__views">

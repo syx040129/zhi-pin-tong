@@ -1,6 +1,7 @@
 package com.example.recruitment.application.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.recruitment.ai.dto.MatchResultVO;
 import com.example.recruitment.ai.service.JobMatchService;
@@ -175,8 +176,19 @@ public class ApplicationService {
         if (status == null || !java.util.Set.of("VIEWED", "INTERVIEW", "REJECTED", "HIRED").contains(status)) {
             throw BusinessException.badRequest("状态参数不正确");
         }
-        application.setStatus(status);
-        applicationMapper.updateById(application);
+        String previous = application.getStatus();
+        if (Objects.equals(previous, status)) return;
+        java.util.Set<String> next = switch (previous == null ? "" : previous) {
+            case "PENDING" -> java.util.Set.of("VIEWED", "INTERVIEW", "REJECTED");
+            case "VIEWED" -> java.util.Set.of("INTERVIEW", "REJECTED");
+            case "INTERVIEW" -> java.util.Set.of("REJECTED", "HIRED");
+            default -> java.util.Set.of();
+        };
+        if (!next.contains(status)) throw BusinessException.conflict("当前投递状态不允许此操作，请刷新后重试");
+        int updated = applicationMapper.update(null, new LambdaUpdateWrapper<JobApplication>()
+                .eq(JobApplication::getId, id).eq(JobApplication::getStatus, previous)
+                .set(JobApplication::getStatus, status));
+        if (updated != 1) throw BusinessException.conflict("投递状态已发生变化，请刷新后重试");
     }
 
     public ApplicationVO companyDetail(Long id, Long companyId) {

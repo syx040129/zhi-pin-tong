@@ -43,7 +43,7 @@ with sync_playwright() as p:
     context,page=make_page()
     visit(page,'/','home-desktop',True)
     # Real search and URL-backed pagination.
-    page.get_by_role('textbox',name='职位或技能关键词').fill('Java')
+    page.get_by_role('textbox',name='职位、公司或技能关键词').fill('Java')
     page.get_by_role('button',name='搜索职位',exact=True).click()
     page.wait_for_url('**/jobs?keyword=Java')
     page.wait_for_load_state('networkidle')

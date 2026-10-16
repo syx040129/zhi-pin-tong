@@ -8,6 +8,7 @@ import com.example.recruitment.application.entity.JobApplication;
 import com.example.recruitment.application.mapper.JobApplicationMapper;
 import com.example.recruitment.common.PageResult;
 import com.example.recruitment.common.constant.CommonConstants;
+import com.example.recruitment.common.constant.RoleConstants;
 import com.example.recruitment.common.exception.BusinessException;
 import com.example.recruitment.common.security.AuthUser;
 import com.example.recruitment.common.utils.SecurityUtils;
@@ -61,9 +62,18 @@ public class JobService {
     private LambdaQueryWrapper<Job> buildPublicWrapper(JobQuery query) {
         LambdaQueryWrapper<Job> qw = new LambdaQueryWrapper<>();
         qw.eq(Job::getStatus, CommonConstants.JOB_ONLINE);
+        qw.exists("SELECT 1 FROM company c WHERE c.id = job.company_id AND c.deleted = 0 AND c.status = {0}",
+                CommonConstants.COMPANY_ACTIVE);
+        qw.eq(query.getCompanyId() != null, Job::getCompanyId, query.getCompanyId());
         if (StringUtils.hasText(query.getKeyword())) {
-            qw.and(w -> w.like(Job::getJobName, query.getKeyword())
-                    .or().like(Job::getJobType, query.getKeyword()));
+            String keyword = query.getKeyword().trim();
+            qw.and(w -> w.like(Job::getJobName, keyword)
+                    .or().like(Job::getJobType, keyword)
+                    .or().exists("SELECT 1 FROM company c WHERE c.id = job.company_id AND c.deleted = 0 "
+                            + "AND c.status = {0} AND c.company_name LIKE {1}",
+                            CommonConstants.COMPANY_ACTIVE, "%" + keyword + "%")
+                    .or().exists("SELECT 1 FROM job_skill s WHERE s.job_id = job.id AND s.skill_name LIKE {0}",
+                            "%" + keyword + "%"));
         }
         qw.like(StringUtils.hasText(query.getCity()), Job::getCity, query.getCity());
         qw.eq(StringUtils.hasText(query.getJobType()), Job::getJobType, query.getJobType());
@@ -81,6 +91,7 @@ public class JobService {
             case "salary" -> qw.orderByDesc(Job::getSalaryMax);
             default -> qw.orderByDesc(Job::getCreateTime);
         }
+        qw.orderByDesc(Job::getId);
         return qw;
     }
 
@@ -193,11 +204,11 @@ public class JobService {
             throw BusinessException.notFound("岗位不存在");
         }
         AuthUser current = tryCurrentUser();
-        if (current == null && !CommonConstants.JOB_ONLINE.equals(job.getStatus())) {
+        if (!CommonConstants.JOB_ONLINE.equals(job.getStatus()) && !canViewOffline(job, current)) {
             throw BusinessException.notFound("岗位不存在");
         }
+        jobMapper.incrementViewCount(jobId);
         job.setViewCount((job.getViewCount() == null ? 0 : job.getViewCount()) + 1);
-        jobMapper.updateById(job);
         Company company = companyMapper.selectById(job.getCompanyId());
         List<JobSkill> skills = jobSkillMapper.selectList(new LambdaQueryWrapper<JobSkill>()
                 .eq(JobSkill::getJobId, jobId));
@@ -225,6 +236,18 @@ public class JobService {
             }
         }
         return toVO(job, company, skills, current, favorite, applied, cachedMatch);
+    }
+
+    private boolean canViewOffline(Job job, AuthUser current) {
+        if (current == null) return false;
+        if (RoleConstants.ADMIN.equals(current.getRole())) return true;
+        if (RoleConstants.COMPANY.equals(current.getRole())) {
+            Company company = companyMapper.selectById(job.getCompanyId());
+            return company != null && Objects.equals(company.getUserId(), current.getId());
+        }
+        return RoleConstants.USER.equals(current.getRole()) && applicationMapper.selectCount(
+                new LambdaQueryWrapper<JobApplication>().eq(JobApplication::getUserId, current.getId())
+                        .eq(JobApplication::getJobId, job.getId())) > 0;
     }
 
     @Transactional

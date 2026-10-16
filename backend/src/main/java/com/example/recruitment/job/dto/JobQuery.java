@@ -1,6 +1,7 @@
 package com.example.recruitment.job.dto;
 
 import lombok.Data;
+import jakarta.validation.constraints.Positive;
 
 /**
  * 岗位搜索条件
@@ -9,6 +10,8 @@ import lombok.Data;
 public class JobQuery {
 
     private String keyword;
+    @Positive
+    private Long companyId;
     private String city;
     private String jobType;
     private String education;

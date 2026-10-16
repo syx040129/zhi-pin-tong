@@ -2,7 +2,7 @@
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import type { CompanyVO, JobVO, MatchResultVO, OptimizeResultVO, ResumeVO } from '@/types/api'
+import type { PublicCompanyVO, JobVO, MatchResultVO, OptimizeResultVO, ResumeVO } from '@/types/api'
 import { getJob } from '@/api/job'
 import { publicCompany } from '@/api/company'
 import { addFavorite, removeFavorite } from '@/api/favorite'
@@ -23,7 +23,7 @@ const isUser = computed(() => auth.isLoggedIn && auth.role === 'USER')
 const jobId = computed(() => Number(route.params.id))
 
 const job = ref<JobVO | null>(null)
-const company = ref<CompanyVO | null>(null)
+const company = ref<PublicCompanyVO | null>(null)
 const loading = ref(true)
 const favBusy = ref(false)
 
@@ -317,7 +317,7 @@ onMounted(loadJob)
                     {{ job.companyName?.[0] || '企' }}
                   </el-avatar>
                   <div class="company-card__info">
-                    <div class="company-card__name">{{ job.companyName }}</div>
+                    <router-link :to="`/companies/${job.companyId}`" class="company-card__name">{{ job.companyName }}</router-link>
                     <div class="company-card__chips">
                       <el-tag v-if="company?.industry || job.companyIndustry" size="small" effect="plain" type="primary">
                         {{ company?.industry || job.companyIndustry }}
@@ -333,6 +333,7 @@ onMounted(loadJob)
                   <el-icon><Location /></el-icon>{{ company.address }}
                 </div>
                 <p class="company-card__desc">{{ companyDesc() }}</p>
+                <router-link :to="`/companies/${job.companyId}`" class="secondary-button">查看企业与在招职位 <el-icon><ArrowRight /></el-icon></router-link>
               </div>
             </div>
 

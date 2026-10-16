@@ -19,6 +19,7 @@ const jobId = computed(() => Number(route.params.jobId))
 const result = ref<MatchResultVO | null>(null)
 const loading = ref(true)
 const failed = ref(false)
+const initFailed = ref(false)
 const hasResume = ref<boolean | null>(null)
 const resumes = ref<ResumeVO[]>([])
 const selectedId = ref<number>()
@@ -68,13 +69,16 @@ async function runMatch(): Promise<void> {
 }
 
 async function init(): Promise<void> {
+  loading.value = true
+  initFailed.value = false
   try {
     resumes.value = await listResumes()
     hasResume.value = resumes.value.length > 0
-    selectedId.value = resumes.value[0]?.id
+    selectedId.value = resumes.value.find(resume => resume.id === Number(route.query.resumeId))?.id ?? resumes.value[0]?.id
     applied.value = Boolean((await getJob(jobId.value)).applicationStatus)
   } catch {
-    hasResume.value = false
+    initFailed.value = true
+    hasResume.value = null
   }
   if (hasResume.value) await runMatch()
   else loading.value = false
@@ -111,7 +115,10 @@ onMounted(init)
       </div>
 
       <!-- 无简历引导 -->
-      <div v-if="hasResume === false" class="panel no-resume">
+      <el-result v-if="initFailed" icon="error" title="匹配数据加载失败" sub-title="暂时无法读取简历或岗位信息，请重试">
+        <template #extra><el-button type="primary" @click="init">重新加载</el-button></template>
+      </el-result>
+      <div v-else-if="hasResume === false" class="panel no-resume">
         <el-empty :image-size="120" description="匹配分析需要先有一份简历">
           <p class="no-resume__hint">AI 需要理解你的简历内容才能计算匹配度</p>
           <el-button type="primary" size="large" @click="router.push('/resume')">

@@ -17,7 +17,8 @@
 #app .job-list .job-card__name:hover { color:var(--c-primary); }
 #app .job-list .job-card__salary { font-size:17px; color:var(--c-primary); }
 #app .job-list .job-card__views { display:none; }
-#app .job-list .job-card__company { margin-top:4px; font-size:12px; }
+#app .job-list .job-card__company { display:block; margin-top:4px; font-size:12px; }
+#app .job-list .job-card__company:hover { color:var(--c-primary); }
 #app .job-list .job-card__meta { margin:18px 0 14px; flex-wrap:wrap; gap:12px; font-size:13px; }
 #app .job-list .fav-btn { width:38px; height:38px; border-radius:6px; margin-left:0; }
 #app .job-list .pagination-wrap { padding:24px 0; }

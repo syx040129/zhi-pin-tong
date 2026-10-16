@@ -4,6 +4,7 @@ import com.example.recruitment.ai.config.AiProperties;
 import com.example.recruitment.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +41,8 @@ public class LlmClient {
         try {
             ChatClient chatClient = builder.build();
             String content = chatClient.prompt()
+                    .options(OpenAiChatOptions.builder().maxTokens(aiProperties.getMaxTokens())
+                            .temperature(aiProperties.getTemperature()).build())
                     .system(system)
                     .user(user)
                     .call()

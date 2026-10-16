@@ -31,6 +31,21 @@ class ApplicationServiceTest {
     @InjectMocks ApplicationService service;
 
     @Test
+    void terminalStatusCannotMoveBackAndConcurrentChangesAreRejected() {
+        JobApplication app = new JobApplication(); app.setJobId(7L); app.setStatus("HIRED");
+        Job job = new Job(); job.setCompanyId(5L);
+        when(applicationMapper.selectById(1L)).thenReturn(app);
+        when(jobMapper.selectById(7L)).thenReturn(job);
+        assertEquals(409, assertThrows(BusinessException.class, () -> service.updateStatus(1L, 5L, "VIEWED")).getCode());
+        service.updateStatus(1L, 5L, "HIRED"); // 同一状态重复提交幂等
+        app.setStatus("INTERVIEW");
+        when(applicationMapper.update(isNull(), any())).thenReturn(0);
+        assertEquals(409, assertThrows(BusinessException.class, () -> service.updateStatus(1L, 5L, "HIRED")).getCode());
+        when(applicationMapper.update(isNull(), any())).thenReturn(1);
+        assertDoesNotThrow(() -> service.updateStatus(1L, 5L, "HIRED"));
+    }
+
+    @Test
     void cannotHandleAnotherCompanyApplication() {
         JobApplication application = new JobApplication(); application.setJobId(7L);
         Job job = new Job(); job.setCompanyId(5L);

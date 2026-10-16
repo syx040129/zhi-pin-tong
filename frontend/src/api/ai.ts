@@ -15,6 +15,7 @@ import type {
   OptimizeRequest,
   OptimizeResultVO,
   RecommendItemVO,
+  RecommendationQuery,
 } from '@/types/api'
 
 /* ===== AI 简历分析 / 优化 ===== */
@@ -37,12 +38,12 @@ export function matchJob(payload: MatchRequest): Promise<MatchResultVO> {
   return request.post<MatchResultVO>('/ai/match', payload)
 }
 
-export function getRecommendations(): Promise<RecommendItemVO[]> {
-  return request.get<RecommendItemVO[]>('/ai/recommendations')
+export function getRecommendations(params: RecommendationQuery = {}): Promise<RecommendItemVO[]> {
+  return request.get<RecommendItemVO[]>('/ai/recommendations', { params })
 }
 
-export function refreshRecommendations(): Promise<RecommendItemVO[]> {
-  return request.post<RecommendItemVO[]>('/ai/recommendations/refresh')
+export function refreshRecommendations(params: RecommendationQuery = {}): Promise<RecommendItemVO[]> {
+  return request.post<RecommendItemVO[]>('/ai/recommendations/refresh', undefined, { params })
 }
 
 /* ===== AI 模拟面试 ===== */

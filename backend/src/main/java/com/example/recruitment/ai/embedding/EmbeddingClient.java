@@ -6,7 +6,6 @@ import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +44,36 @@ public class EmbeddingClient {
     }
 
     public record SimilarityResult(int score, String source, String explanation) {}
+
+    /** 一次请求向量化简历与候选岗位；批次失败时统一降级，避免混用向量空间。 */
+    public List<SimilarityResult> similarities(String first, List<String> seconds) {
+        if (seconds.isEmpty()) return List.of();
+        if (aiProperties.realMode() && aiProperties.isEmbeddingEnabled()) {
+            try {
+                EmbeddingModel model = embeddingModelProvider.getIfAvailable();
+                if (model == null) throw new IllegalStateException("Embedding model unavailable");
+                List<String> texts = new ArrayList<>();
+                texts.add(first);
+                texts.addAll(seconds);
+                List<float[]> vectors = model.embed(texts);
+                if (vectors == null || vectors.size() != texts.size() || !valid(vectors.get(0))
+                        || vectors.stream().anyMatch(v -> !valid(v) || v.length != vectors.get(0).length)) {
+                    throw new IllegalStateException("Invalid embedding batch");
+                }
+                return vectors.subList(1, vectors.size()).stream().map(vector -> new SimilarityResult(
+                        similarityScore(vectors.get(0), vector), "EMBEDDING", "使用真实 Embedding 模型批量计算文本相似度")).toList();
+            } catch (Exception e) {
+                log.warn("批量向量调用失败，整批改用本地向量: {}", e.getMessage());
+                return localSimilarities(first, seconds, "FALLBACK", "向量模型调用失败，本批次使用本地哈希向量近似计算");
+            }
+        }
+        return localSimilarities(first, seconds, "LOCAL", "使用本地哈希向量近似计算，不代表真实模型的语义判断");
+    }
+
+    private List<SimilarityResult> localSimilarities(String first, List<String> seconds, String source, String note) {
+        float[] vector = localEmbed(first);
+        return seconds.stream().map(second -> new SimilarityResult(similarityScore(vector, localEmbed(second)), source, note)).toList();
+    }
 
     /** Both texts must use the same vector space, including when either call fails. */
     public SimilarityResult similarity(String first, String second) {

@@ -29,4 +29,8 @@ public class RecommendItemVO {
     private List<String> matchedSkills;
     private List<String> missingSkills;
     private String reason;
+    private Long resumeId;
+    private String source;
+    private String semanticSource;
+    private String executionNote;
 }

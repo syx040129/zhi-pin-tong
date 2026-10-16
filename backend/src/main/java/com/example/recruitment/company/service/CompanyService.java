@@ -8,6 +8,10 @@ import com.example.recruitment.common.exception.BusinessException;
 import com.example.recruitment.common.utils.SecurityUtils;
 import com.example.recruitment.company.dto.CompanyForm;
 import com.example.recruitment.company.dto.CompanyVO;
+import com.example.recruitment.company.dto.CompanyQuery;
+import com.example.recruitment.company.dto.CompanyFiltersVO;
+import com.example.recruitment.company.dto.CompanyJobCount;
+import com.example.recruitment.company.dto.PublicCompanyVO;
 import com.example.recruitment.company.entity.Company;
 import com.example.recruitment.company.mapper.CompanyMapper;
 import com.example.recruitment.job.entity.Job;
@@ -100,12 +104,58 @@ public class CompanyService {
     /**
      * 公共企业详情
      */
-    public CompanyVO publicDetail(Long id) {
+    public PublicCompanyVO publicDetail(Long id) {
         Company company = companyMapper.selectById(id);
-        if (company == null || CommonConstants.COMPANY_DISABLED.equals(company.getStatus())) {
+        if (company == null || !CommonConstants.COMPANY_ACTIVE.equals(company.getStatus())) {
             throw BusinessException.notFound("企业不存在");
         }
-        return toVO(company, true);
+        long count = jobMapper.selectCount(new LambdaQueryWrapper<Job>()
+                .eq(Job::getCompanyId, id).eq(Job::getStatus, CommonConstants.JOB_ONLINE));
+        return toPublicVO(company, count);
+    }
+
+    public PageResult<PublicCompanyVO> publicPage(CompanyQuery query) {
+        LambdaQueryWrapper<Company> qw = new LambdaQueryWrapper<Company>()
+                .eq(Company::getStatus, CommonConstants.COMPANY_ACTIVE)
+                .like(StringUtils.hasText(query.getKeyword()), Company::getCompanyName,
+                        query.getKeyword() == null ? null : query.getKeyword().trim())
+                .eq(StringUtils.hasText(query.getIndustry()), Company::getIndustry, query.getIndustry())
+                .eq(StringUtils.hasText(query.getScale()), Company::getScale, query.getScale());
+        if (!query.isIncludeInactiveHiring()) {
+            qw.exists("SELECT 1 FROM job j WHERE j.company_id = company.id AND j.deleted = 0 AND j.status = {0}",
+                    CommonConstants.JOB_ONLINE);
+        }
+        qw.orderByDesc(Company::getId);
+        Page<Company> page = companyMapper.selectPage(new Page<>(query.getPage(), query.getSize()), qw);
+        List<Company> companies = page.getRecords();
+        if (companies.isEmpty()) return PageResult.map(page, List.of());
+        Map<Long, Long> counts = companyMapper.countOnlineJobs(companies.stream().map(Company::getId).toList())
+                .stream().collect(Collectors.toMap(CompanyJobCount::getCompanyId, CompanyJobCount::getJobCount));
+        return PageResult.map(page, companies.stream()
+                .map(company -> toPublicVO(company, counts.getOrDefault(company.getId(), 0L))).toList());
+    }
+
+    public CompanyFiltersVO publicFilters() {
+        List<Company> companies = companyMapper.selectList(new LambdaQueryWrapper<Company>()
+                .select(Company::getIndustry, Company::getScale)
+                .eq(Company::getStatus, CommonConstants.COMPANY_ACTIVE));
+        return new CompanyFiltersVO(
+                companies.stream().map(Company::getIndustry).filter(StringUtils::hasText).distinct().sorted().toList(),
+                companies.stream().map(Company::getScale).filter(StringUtils::hasText).distinct().sorted().toList());
+    }
+
+    private PublicCompanyVO toPublicVO(Company company, long jobCount) {
+        PublicCompanyVO vo = new PublicCompanyVO();
+        vo.setId(company.getId());
+        vo.setCompanyName(company.getCompanyName());
+        vo.setLogo(company.getLogo());
+        vo.setIndustry(company.getIndustry());
+        vo.setScale(company.getScale());
+        vo.setAddress(company.getAddress());
+        vo.setDescription(company.getDescription());
+        vo.setWebsite(company.getWebsite());
+        vo.setJobCount(jobCount);
+        return vo;
     }
 
     public CompanyVO toVO(Company company, boolean withJobCount) {

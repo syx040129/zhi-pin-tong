@@ -11,6 +11,7 @@ import PositionCard from '@/components/PositionCard.vue'
 const auth = useAuthStore()
 const router = useRouter()
 const keyword = ref('')
+const searchType = ref<'jobs' | 'companies'>('jobs')
 const city = ref('')
 const category = ref('')
 const categories = ['', '后端开发', '前端开发', '人工智能', '产品', '设计']
@@ -23,7 +24,7 @@ const failed = ref(false)
 const isUser = computed(() => auth.isLoggedIn && auth.role === 'USER')
 let requestId = 0
 function search(value = keyword.value) {
-  router.push({ path: '/jobs', query: { ...(value.trim() ? { keyword: value.trim() } : {}), ...(city.value ? { city: city.value } : {}) } })
+  router.push({ path: `/${searchType.value}`, query: { ...(value.trim() ? { keyword: value.trim() } : {}), ...(searchType.value === 'jobs' && city.value ? { city: city.value } : {}) } })
 }
 async function loadJobs() {
   const id = ++requestId
@@ -55,12 +56,17 @@ onMounted(() => {
         <div class="career-hero__main">
           <h1>下一份工作，<br>从这里开始。</h1>
           <p>发现合适的岗位，也为下一次面试做好准备。</p>
+          <el-radio-group v-model="searchType" aria-label="搜索类型" class="search-type">
+            <el-radio-button value="jobs">职位</el-radio-button>
+            <el-radio-button value="companies">公司</el-radio-button>
+          </el-radio-group>
           <form class="career-search" role="search" @submit.prevent="search()">
-            <el-input v-model="keyword" aria-label="职位或技能关键词" placeholder="搜索职位、技能关键词…" clearable><template #prefix><el-icon aria-hidden="true"><Search /></el-icon></template></el-input>
-            <el-select v-model="city" aria-label="工作城市" placeholder="全国" clearable><el-option v-for="item in cities" :key="item" :value="item" :label="item" /></el-select>
-            <button class="primary-button" type="submit">搜索职位</button>
+            <el-input v-model="keyword" :aria-label="searchType === 'jobs' ? '职位、公司或技能关键词' : '公司名称'" :placeholder="searchType === 'jobs' ? '搜索职位、公司、技能关键词…' : '输入公司名称，了解企业与招聘机会'" clearable><template #prefix><el-icon aria-hidden="true"><Search /></el-icon></template></el-input>
+            <el-select v-if="searchType === 'jobs'" v-model="city" aria-label="工作城市" placeholder="全国" clearable><el-option v-for="item in cities" :key="item" :value="item" :label="item" /></el-select>
+            <button class="primary-button" type="submit">{{ searchType === 'jobs' ? '搜索职位' : '搜索公司' }}</button>
           </form>
-          <div class="popular-search"><span>热门搜索</span><button v-for="word in ['Java', '前端', '数据分析', '产品经理']" :key="word" type="button" @click="search(word)">{{ word }}</button></div>
+          <div v-if="searchType === 'jobs'" class="popular-search"><span>热门搜索</span><button v-for="word in ['Java', '前端', '数据分析', '产品经理']" :key="word" type="button" @click="search(word)">{{ word }}</button></div>
+          <div v-else class="popular-search"><router-link to="/companies">浏览招聘企业 →</router-link></div>
           <div v-if="stats" class="career-hero__stats"><span><strong>{{ stats.jobCount }}</strong> 个在线岗位</span><span><strong>{{ stats.companyCount }}</strong> 家招聘企业</span></div>
         </div>
         <aside class="career-guide">
@@ -91,6 +97,7 @@ onMounted(() => {
   </div>
 </template>
 <style scoped>
+.search-type { margin-bottom:12px; }
 .home { padding-bottom:64px; }
 .career-hero { background:#edf3fb; border-bottom:1px solid #dee7f2; }
 .career-hero__inner { max-width:var(--content-width); margin:auto; padding:64px 24px 56px; display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:72px; align-items:center; }

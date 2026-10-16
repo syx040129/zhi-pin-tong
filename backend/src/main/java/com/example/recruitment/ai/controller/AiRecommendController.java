@@ -1,6 +1,9 @@
 package com.example.recruitment.ai.controller;
 
 import com.example.recruitment.ai.dto.RecommendItemVO;
+import com.example.recruitment.ai.dto.RecommendationQuery;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import com.example.recruitment.ai.service.RecommendationService;
 import com.example.recruitment.common.Result;
 import com.example.recruitment.common.utils.SecurityUtils;
@@ -29,15 +32,15 @@ public class AiRecommendController {
     @Operation(summary = "获取智能推荐岗位（含 6 小时缓存，首次自动计算）")
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public Result<List<RecommendItemVO>> recommendations() {
+    public Result<List<RecommendItemVO>> recommendations(@Valid @ModelAttribute RecommendationQuery query) {
         return Result.ok(recommendationService.recommendations(
-                SecurityUtils.currentUserId(), false));
+                SecurityUtils.currentUserId(), false, query));
     }
 
     @Operation(summary = "重新计算智能推荐")
     @PostMapping("/refresh")
     @PreAuthorize("hasRole('USER')")
-    public Result<List<RecommendItemVO>> refresh() {
-        return Result.ok(recommendationService.refresh(SecurityUtils.currentUserId()));
+    public Result<List<RecommendItemVO>> refresh(@Valid @ModelAttribute RecommendationQuery query) {
+        return Result.ok(recommendationService.recommendations(SecurityUtils.currentUserId(), true, query));
     }
 }

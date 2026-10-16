@@ -2,6 +2,10 @@ server:
   port: 8080
 
 spring:
+  ai:
+    retry:
+      # 交互请求超时/失败后由业务降级，避免框架重试延长页面等待。
+      max-attempts: 1
   application:
     name: smart-recruitment
   config:

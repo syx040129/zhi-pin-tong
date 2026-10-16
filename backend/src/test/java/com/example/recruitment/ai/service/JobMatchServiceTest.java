@@ -11,11 +11,31 @@ import com.example.recruitment.resume.mapper.ResumeExperienceMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class JobMatchServiceTest {
+    @Test
+    void batchLoadsResumeExperiencesOnceAndReusesPreloadedJobSkills() {
+        var experiences = mock(ResumeExperienceMapper.class);
+        var skills = mock(JobSkillMapper.class);
+        var embeddings = mock(EmbeddingClient.class);
+        when(experiences.selectList(any())).thenReturn(List.of());
+        var semantic = new EmbeddingClient.SimilarityResult(80, "LOCAL", "本地向量");
+        when(embeddings.similarities(anyString(), anyList())).thenReturn(List.of(semantic, semantic));
+        var service = new JobMatchService(skills, experiences, embeddings, new AiProperties(), mock(LlmClient.class));
+        Resume resume = new Resume(); resume.setId(9L); resume.setSkills("Java");
+        Job first = new Job(); first.setId(1L);
+        Job second = new Job(); second.setId(2L);
+        var result = service.computeBatch(resume, List.of(first, second), Map.of());
+        assertEquals(2, result.size());
+        assertEquals(result.get(1L).getMatchScore(), result.get(2L).getMatchScore());
+        verify(experiences, times(1)).selectList(any());
+        verify(embeddings, times(1)).similarities(anyString(), anyList());
+        verifyNoInteractions(skills);
+    }
     @Test
     void failedReasonIsReportedSeparatelyFromSuccessfulEmbedding() {
         var properties = new AiProperties(); properties.setEnabled(true); properties.setMock(false); properties.setApiKey("test");
