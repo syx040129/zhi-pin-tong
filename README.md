@@ -6,7 +6,7 @@
 
 完整架构、配置、API、数据库、功能状态和验收记录见 [项目总文档](docs/项目总文档.md)。
 
-> 当前可验证结论：本地 Mock 演示可有条件交付。默认完全无密钥启动失败，需使用下方显式 Mock 命令；Swagger 在线文档生成失败。真实模型、Docker 和生产部署未验收，详见总文档的已知问题。
+> 2026-10-16 修复：Mock 模式无需 AI Key 或框架占位值即可启动；真实模式按需装配 Chat / Embedding 模型。Swagger 在线文档生成问题、真实供应商调用、Docker 和生产部署的验收限制仍见总文档。
 
 ## 环境要求
 
@@ -38,10 +38,10 @@ mysql -u root -p --default-character-set=utf8mb4 -e "source sql/demo-data.sql"
 
 ```powershell
 cd backend
-mvn spring-boot:run '-Dspring-boot.run.arguments=--ai.enabled=false --ai.mock=true --spring.ai.openai.api-key=not-configured'
+mvn spring-boot:run '-Dspring-boot.run.arguments=--ai.enabled=false --ai.mock=true'
 ```
 
-`not-configured` 仅满足 Spring AI 的非空连接配置校验，不是真实密钥。命令显式关闭真实模型；不改写 .env.local，业务使用规则与本地向量。后端默认 8080，健康入口为 [health](http://localhost:8080/api/common/health)。
+命令显式使用规则与本地向量，不改写 .env.local。没有本地真实模型配置时，也可直接运行 `mvn spring-boot:run` 或在 IDEA 启动 `RecruitmentApplication`；默认进入 Mock 模式，无需提供任何 AI Key。后端默认 8080，健康入口为 [health](http://localhost:8080/api/common/health)。
 
 ### 3. 启动前端
 
